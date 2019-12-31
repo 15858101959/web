@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta http-equiv="Content-Type" content="text/html">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css"
+　　　　media="screen and (max-device-width: 400px)"
+　　　　href="tinyScreen.css" />
+<link rel="stylesheet" type="text/css"
+　　　　media="screen and (min-width: 400px) and (max-device-width: 600px)"
+　　　　href="smallScreen.css" />
+<title>个人小说推荐</title> 
+</head>
+<body>
+
+<div id="container" style="width:100%"></div>
+<div id="header" style="background-color:#FFA500;height:200px;width:100%">
+
+<h1 style="margin-bottom:0;text-align:center;">注册界面</h1>
+<p style="text-align:center;"><a href="file:///C:/Users/master/Desktop/zhujiemian.html" target="_blank">返回主界面</a></p>
+</div>
+
+<div id="pianhao" style="background-color:#FFD700;height:460px;width:100%;float:left;">
+		<script type="text/javascript">
+			
+			
+			function check(name,reg,spanId,okinfo,errinfo){
+				var flag;				
+				var val = document.getElementsByName(name)[0].value;
+				
+				
+				var oSpanNode = document.getElementById(spanId);
+				
+				if(reg.test(val)){
+					oSpanNode.innerHTML = okinfo.fontcolor("green");
+					flag = true;
+				}else{
+					oSpanNode.innerHTML = errinfo.fontcolor("red");
+					flag = false;
+				}				
+				return flag;
+			}
+			
+			
+			//校验用户名。
+			function checkUser(){
+				
+				var reg = /^[a-z]{4}$/i;
+				return check("user",reg,"userspan","用户名正确","用户名错误");
+				
+				
+			}
+			
+			
+			//校验密码；
+			function checkPsw(){
+				
+				var reg  = /^\d{4}$/;
+				return check("psw",reg,"pswspan","密码格式正确","密码格式错误");
+			}
+			
+			
+			//校验确定密码。只要和密码一致即可。
+			 function checkRepsw(){
+			 	
+				var flag;
+				//获取密码框内容。				
+				var pass  = document.getElementsByName("psw")[0].value;				
+				
+				//获取确认密码框内容。
+				var repass  = document.getElementsByName("repsw")[0].value;
+				
+				
+				//获取确认密码的span区域。 
+				var oSpanNode = document.getElementById("repswspan");
+				
+				if(pass==repass){
+					oSpanNode.innerHTML = "两次密码一致".fontcolor("green");
+					flag = true;
+				}else{
+					oSpanNode.innerHTML = "两次密码不一致".fontcolor("red");
+					flag = false;
+				}			
+				return flag;
+			 }
+			
+			
+			
+			
+			//校验邮件
+			function checkMail(){
+				var reg = /^\w+@\w+(\.\w+)+$/i;
+				return check("mail",reg,"mailspan","邮件地址正确","邮件地址错误");
+			}
+			
+			// 提交事件处理。
+			function checkForm(){
+//				alert(checkUser() +"--"+ checkPsw() +"--"+ checkRepsw() +"--"+ checkMail());
+				if(checkUser() && checkPsw() && checkRepsw() && checkMail())
+					return true;
+				return false;
+			}
+			
+			
+			
+			
+		
+			function mySubmit(){
+				
+				var oFormNode = document.getElementById("userinfo");
+				
+				oFormNode.submit();
+				
+				
+			}
+		</script>
+		
+		
+		<form id="userinfo" οnsubmit="return checkForm()">
+			
+			用户名称：<input type="text" name="user" οnblur="checkUser()" />
+			<span id="userspan"></span>
+			<br/>
+			
+			输入密码：<input type="text" name="psw" οnblur="checkPsw()"  />
+			<span id="pswspan"></span>
+			<br/>
+			
+			确定密码：<input type="text" name="repsw" οnblur="checkRepsw()" />
+			<span id="repswspan"></span>
+			<br/>
+			
+			邮件地址：<input type="text" name="mail" οnblur="checkMail()"  />
+			<span id="mailspan"></span>
+			<br/>
+			
+			<input type="submit" value="提交数据" />
+		</form>
+		<hr/>
+		
+</div>
+
+</body>
+</html>
